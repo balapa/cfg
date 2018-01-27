@@ -72,4 +72,4 @@ alias zwirner="cd ~/Documents/Icreon/davidzwirner-root-wp/davidzwirner"
 alias dzc="cd ~/Documents/Icreon/davidzwirner-chinese"
 
 # dotfiles git config : https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias myconfig='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
