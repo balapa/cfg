@@ -5,13 +5,16 @@ export PATH=$PATH:/usr/local/mysql/bin/
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/balapa/.oh-my-zsh
 export LANG=C
+export PATH=`pwd`/flutter/bin:$PATH
+export PATH=$PATH:/Applications/Genymotion.app/Contents/MacOS/tools
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
+  # git
   zsh-syntax-highlighting
 	vi-mode
+	docker
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -50,6 +53,8 @@ alias ta="tmux attach"
 alias tconf="nvim ~/.tmux.conf"
 # monokai vim
 alias monovim="nvim ~/.vim/bundle/vim-sublime-monokai/colors/monokai.vim"
+# balakai vim
+alias balakai="nvim ~/Projects/vim-balakai"
 
 # projects
 alias jirapp="cd ~/Documents/Icreon/jirapp-project/jirapp-source"
