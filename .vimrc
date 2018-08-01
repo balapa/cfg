@@ -1,3 +1,4 @@
+" echom ">^.^<"
 filetype off
 " Set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -11,7 +12,8 @@ Plugin 'VundleVim/Vundle.vim'
 " PLUGIN LIST
 " ===========
 
-Plugin 'ErichDonGubler/vim-sublime-monokai'
+" Plugin 'ErichDonGubler/vim-sublime-monokai'
+Plugin 'vim-balakai'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jiangmiao/auto-pairs'
@@ -37,6 +39,9 @@ Plugin 'mxw/vim-jsx'
 Plugin 'mattn/emmet-vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'alampros/vim-styled-jsx'
+Plugin 'captbaritone/better-indent-support-for-php-with-html'
+Plugin 'vim-scripts/BufOnly.vim'
+" Plugin 'Valloric/MatchTagAlways' # this plugin requires python apparently
 
 " Vundle end
 call vundle#end()
@@ -48,7 +53,7 @@ call vundle#end()
 
 filetype plugin indent on
 syntax on
-colorscheme monokai
+colorscheme balakai
 
 
 
@@ -74,8 +79,8 @@ inoremap <Down> <NOP>
 inoremap <Left> <NOP>
 inoremap <Right> <NOP>
 " Go to end of character
-nnoremap <c-l> g_
 vnoremap <c-l> g_
+nnoremap <c-l> g_
 " Go to beginning of character
 nnoremap <c-h> ^
 vnoremap <c-h> ^
@@ -84,7 +89,7 @@ nnoremap <c-k> :m-2<cr>
 " Move line one down
 nnoremap <c-j> :m+1<cr>
 " Open new terminal buffer
-nnoremap <c-t> :vs+te<cr>i
+" nnoremap <c-t> :vs+te<cr>i
 nnoremap <silent> <c-w><c-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <c-w><c-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <c-w><c-k> :TmuxNavigateUp<cr>
@@ -97,6 +102,8 @@ nnoremap <silent> <c-p> :FZF<cr>
 nnoremap <c-g> :Ag<cr>
 " Kill buffer without leaving split window, ! is used to force kill terminal
 map <c-c> :BD!<cr>
+" only kill window if there are two windows
+" map <c-x> :bp<bar>sp<bar>bn<bar>bd<CR>
 " Escape terminal from nvim
 tnoremap <c-\><c-\> <c-\><c-n>
 " NERDTreeToggle shortcut
@@ -112,6 +119,10 @@ nmap <leader>7 <Plug>BufTabLine.Go(7)
 nmap <leader>8 <Plug>BufTabLine.Go(8)
 nmap <leader>9 <Plug>BufTabLine.Go(9)
 nmap <leader>0 <Plug>BufTabLine.Go(10)
+
+" keep yanked content in register
+" https://stackoverflow.com/questions/10723700/how-can-vim-keep-the-content-of-register-when-pasting-over-selected-text
+vnoremap <leader>p "_dP
 
 
 
@@ -138,6 +149,7 @@ let g:user_emmet_settings={
 let g:user_emmet_install_global=0
 " Vim emmet remap leader key, only works in normal mode
 let g:user_emmet_expandabbr_key='<Tab>'
+let g:user_emmet_leader_key='<c-q>'
 " REMEMBER VIM TREATS <TAB> AND <C-I> THE SAME https://www.reddit.com/r/vim/comments/3dauvp/i_cant_inoremap_tab_and_ci_to_different_things
 let g:use_emmet_complete_tag=1
 " Pretty nerdtree
@@ -147,13 +159,14 @@ let NERDTreeDirArrows=1
 " Disable html checker on syntastic
 let g:syntastic_html_checkers=['']
 " Buftabline indicator
-let g:buftabline_indicators=1
+" let g:buftabline_indicators=1
 
 
 
 " ALL SETS
 " ========
 
+set hidden
 " FZF vim runtime path
 set rtp+=/usr/local/opt/fzf
 " Set new vertical split to the right
@@ -189,7 +202,8 @@ set relativenumber
 " Show line number
 set number
 " Tab, space, end of line, indicator
-set listchars=tab:·\ ,trail:·,eol:¬,nbsp:_
+set listchars=tab:·\ ,trail:·,nbsp:_
+" set listchars=tab:·\ ,trail:·,eol:¬,nbsp:_
 set list
 
 
@@ -198,25 +212,44 @@ set list
 " ========
 
 " Jsx comment for vim-commentary
-autocmd FileType javascript.jsx setlocal commentstring={/*\ %s\ */}
+autocmd FileType php.php setlocal commentstring={<!--\ %s\ -->}
 autocmd fileType javascript setlocal tabstop=2
-autocmd FileType html,css,javascript.jsx EmmetInstall
+autocmd FileType html,css,javascript.jsx,php EmmetInstall
 autocmd FileType nerdtree setlocal relativenumber
 " Disable automatic comment insertion
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" set filetype as phtml on php files
+" au BufNewFile,BufRead *.php set filetype=phtml
+" autocmd filetype php set filtype=phtml
+
+
+
+" FUNCTIONS
+" =========
+
+" Function to highlight cursorline and cursorlinenr
+function! BufferNotActive()
+	setlocal nocursorline nocursorcolumn
+endfunction
+
+function! BufferIsActive()
+	setlocal cursorline
+endfunction
+
+" Execute macro over visual range
+xnoremap @ :<c-u>call ExecuteMacroOverVisualRange()<CR>
+
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
 
 
 
 " AUTOGROUPS
 " ==========
 
-" Function to highlight cursorline and cursorlinenr
-function! BufferNotActive()
-	setlocal nocursorline
-endfunction
-function! BufferIsActive()
-	setlocal cursorline
-endfunction
 " Highlight current line only on active buffer
 augroup CursorLine
 	autocmd!
@@ -244,8 +277,9 @@ hi BufTabLineFill guibg=#626262 ctermbg=241
 hi Normal guibg=none ctermbg=none
 " Line number
 hi LineNr guifg=#555555 guibg=none ctermfg=240 ctermbg=none
-hi CursorLine ctermbg=236
-hi CursorLineNr guifg=#ffffff ctermfg=white ctermbg=236
+hi CursorLine ctermbg=237
+" hi CursorLineNr guifg=#ffffff ctermfg=white ctermbg=236
+hi CursorLineNr guifg=#ffffff ctermfg=white ctermbg=none
 hi NonText guibg=none ctermbg=none
 hi VertSplit guibg=#626262 guifg=#626262 ctermbg=241 ctermfg=241
 hi NonText guifg=#555555 ctermfg=240
