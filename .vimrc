@@ -33,14 +33,19 @@ Plugin 'xolox/vim-session'
 Plugin 'qpkorr/vim-bufkill'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-fugitive'
-Plugin 'wavded/vim-stylus'
+" Plugin 'wavded/vim-stylus'
+Plugin 'iloginow/vim-stylus'
+" Plugin 'vim-scripts/vim-stylus'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'mattn/emmet-vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'alampros/vim-styled-jsx'
-Plugin 'captbaritone/better-indent-support-for-php-with-html'
+" Plugin 'captbaritone/better-indent-support-for-php-with-html'
+Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'vim-scripts/BufOnly.vim'
+" php indentation solution
+" https://stackoverflow.com/questions/459478/correct-indentation-of-html-and-php-using-vim/5997430#5997430
 " Plugin 'Valloric/MatchTagAlways' # this plugin requires python apparently
 
 " Vundle end
@@ -105,7 +110,7 @@ map <c-c> :BD!<cr>
 " only kill window if there are two windows
 " map <c-x> :bp<bar>sp<bar>bn<bar>bd<CR>
 " Escape terminal from nvim
-tnoremap <c-\><c-\> <c-\><c-n>
+" tnoremap <c-\><c-\> <c-\><c-n>
 " NERDTreeToggle shortcut
 map <c-n> :NERDTreeToggle<cr>
 " Buftabline buffers list shortcut
@@ -213,6 +218,7 @@ set list
 
 " Jsx comment for vim-commentary
 autocmd FileType php.php setlocal commentstring={<!--\ %s\ -->}
+autocmd FileType stylus setlocal commentstring=//\ %s
 autocmd fileType javascript setlocal tabstop=2
 autocmd FileType html,css,javascript.jsx,php EmmetInstall
 autocmd FileType nerdtree setlocal relativenumber
