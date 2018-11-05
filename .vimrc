@@ -47,6 +47,7 @@ Plugin 'vim-scripts/BufOnly.vim'
 " php indentation solution
 " https://stackoverflow.com/questions/459478/correct-indentation-of-html-and-php-using-vim/5997430#5997430
 " Plugin 'Valloric/MatchTagAlways' # this plugin requires python apparently
+Plugin 'godlygeek/tabular'
 
 " Vundle end
 call vundle#end()
