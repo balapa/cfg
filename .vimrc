@@ -2,18 +2,16 @@
 filetype off
 " Set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+
+" Plugin manager is Vundle https://github.com/VundleVim/Vundle.vim
+" After editing the plugin list, source this file using command :so %
+" Then, install plugins using :BundleInstall
+
 " Vundle begin
 call vundle#begin()
-" Let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
 
-
-
-" PLUGIN LIST
-" ===========
-
-" Plugin 'ErichDonGubler/vim-sublime-monokai'
-Plugin 'vim-balakai'
+Plugin 'VundleVim/Vundle.vim' " required
+Plugin 'balapa/vim-monokai'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jiangmiao/auto-pairs'
@@ -33,21 +31,19 @@ Plugin 'xolox/vim-session'
 Plugin 'qpkorr/vim-bufkill'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-fugitive'
-" Plugin 'wavded/vim-stylus'
 Plugin 'iloginow/vim-stylus'
-" Plugin 'vim-scripts/vim-stylus'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'mattn/emmet-vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'alampros/vim-styled-jsx'
-" Plugin 'captbaritone/better-indent-support-for-php-with-html'
-Plugin 'shawncplus/phpcomplete.vim'
+Plugin '2072/PHP-Indenting-for-VIm'
 Plugin 'vim-scripts/BufOnly.vim'
+Plugin 'godlygeek/tabular'
+
 " php indentation solution
 " https://stackoverflow.com/questions/459478/correct-indentation-of-html-and-php-using-vim/5997430#5997430
 " Plugin 'Valloric/MatchTagAlways' # this plugin requires python apparently
-Plugin 'godlygeek/tabular'
 
 " Vundle end
 call vundle#end()
@@ -57,9 +53,9 @@ call vundle#end()
 " START
 " =====
 
-filetype plugin indent on
+" filetype plugin indent on
 syntax on
-colorscheme balakai
+colorscheme monokai
 
 
 
@@ -107,11 +103,11 @@ nnoremap <silent> <c-p> :FZF<cr>
 " Open Ag with c-g shortcut
 nnoremap <c-g> :Ag<cr>
 " Kill buffer without leaving split window, ! is used to force kill terminal
-map <c-c> :BD!<cr>
+map , :bd<cr>
 " only kill window if there are two windows
 " map <c-x> :bp<bar>sp<bar>bn<bar>bd<CR>
 " Escape terminal from nvim
-" tnoremap <c-\><c-\> <c-\><c-n>
+tnoremap <c-\><c-\> <c-\><c-n>
 " NERDTreeToggle shortcut
 map <c-n> :NERDTreeToggle<cr>
 " Buftabline buffers list shortcut
@@ -142,8 +138,8 @@ let $FZF_DEFAULT_COMMAND='ag -g ""'
 " Ordinal number, not buffer number
 let g:buftabline_numbers=2
 " Silver searcher
-let g:ackprg='ag --nogroup --nocolor --column'
-let g:ackprg="ag --vimgrep"
+" let g:ackprg='ag --nogroup --nocolor --column'
+" let g:ackprg="ag --vimgrep"
 " Use JSX syntax in JS file. Vim-jsx
 let g:jsx_ext_required=0
 " Emmet settings
@@ -280,13 +276,10 @@ hi BufTabLineHidden guibg=#626262 ctermbg=241
 hi BufTabLineCurrent guibg=#afdf00 guifg=#005f00 gui=bold ctermbg=148 ctermfg=22 cterm=bold
 hi BufTabLineActive guibg=#ffffff guifg=#585858 gui=bold ctermbg=white ctermfg=240 cterm=bold
 hi BufTabLineFill guibg=#626262 ctermbg=241
-" Background transparent, iterm2 background will be visible
 hi Normal guibg=none ctermbg=none
-" Line number
 hi LineNr guifg=#555555 guibg=none ctermfg=240 ctermbg=none
 hi CursorLine ctermbg=237
-" hi CursorLineNr guifg=#ffffff ctermfg=white ctermbg=236
 hi CursorLineNr guifg=#ffffff ctermfg=white ctermbg=none
 hi NonText guibg=none ctermbg=none
 hi VertSplit guibg=#626262 guifg=#626262 ctermbg=241 ctermfg=241
-hi NonText guifg=#555555 ctermfg=240
+hi NonText guifg=#555555 ctermfg=240" Plugin list
