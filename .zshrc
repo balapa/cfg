@@ -51,30 +51,14 @@ alias sozshrc="source ~/.zshrc"
 alias tl="tmux list-sessions"
 alias ta="tmux attach"
 alias tconf="nvim ~/.tmux.conf"
-# monokai vim
-alias monovim="nvim ~/.vim/bundle/vim-sublime-monokai/colors/monokai.vim"
-# balakai vim
-alias balakai="nvim ~/Projects/vim-balakai"
-
-# projects
-alias jirapp="cd ~/Documents/Icreon/jirapp-project/jirapp-source"
-alias icrtime="cd ~/Documents/Icreon/IcreonTime"
-alias os="cd ~/Documents/Open\ Source/"
-alias icr="cd ~/Documents/Icreon/"
-alias icrus="cd ~/Documents/Icreon/icreonus-new/icreonus-source"
-
-# uiplease
-alias uip="cd ~/Documents/uiplease-project/uiplease"
-alias lh="open http://localhost:1313"
 
 # hugo
 alias hs="hugo server"
 alias push="git push origin master"
 alias sass="npm run sass"
 
-# david zwirner
-alias zwirner="cd ~/Documents/Icreon/davidzwirner-root-wp/davidzwirner"
-alias dzc="cd ~/Documents/Icreon/davidzwirner-chinese"
-
 # dotfiles git config : https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/
 alias myconfig='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
