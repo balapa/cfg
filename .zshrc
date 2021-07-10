@@ -33,10 +33,8 @@ unsetopt list_beep
 
 # ALIASES
 
-# vim open folder
-alias v="vim ."
 # nvim open folder
-alias nv="nvim ."
+alias vim="nvim"
 # sublime
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 # git
